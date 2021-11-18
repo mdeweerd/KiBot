@@ -62,6 +62,7 @@ def test_step_variant_1(test_dir):
     ctx.expect_out_file(prj+'-3D.step')
     ctx.clean_up(keep_project=True)
 
+
 def test_step_variant_2(test_dir):
     prj = 'kibom-variant_4'
     ctx = context.TestContext(test_dir, 'test_step_variant_2', prj, 'step_variant_2', '')
@@ -71,6 +72,7 @@ def test_step_variant_2(test_dir):
     # TODO: Create and compare to golden
     ctx.clean_up(keep_project=True)
 
+
 def test_render_3d_variant_1(test_dir):
     prj = 'kibom-variant_3'
     ctx = context.TestContext(test_dir, 'test_render_3d_variant_1', prj, 'render_3d_variant_1', '')
@@ -78,10 +80,11 @@ def test_render_3d_variant_1(test_dir):
     # Check all outputs are there
     ctx.expect_out_file(prj+'-3D_top.png')
 
-def compare_to_golden(ctx,test_dir,actual,expected=None,maxRatio=.01):
+
+def compare_to_golden(ctx, test_dir, actual, expected=None, maxRatio=.01):
     if expected is None:
         # Placeholder for default name
-        expected=actual+"_golden" 
+        expected=actual + "_golden"
     # Import locally because this may not be final code, and is not used now
     import Image
     from PIL import ImageChops
@@ -90,5 +93,5 @@ def compare_to_golden(ctx,test_dir,actual,expected=None,maxRatio=.01):
     im2 = Image.open(expected)
     diffIm = ImageChops.difference(im2, im1)
     stat = ImageStat.Stat(diffIm)
-    ratio=sum(stat.mean)/len(stat.mean)
+    ratio=sum(stat.mean) / len(stat.mean)
     ctx.expect(ratio<maxRatio)
