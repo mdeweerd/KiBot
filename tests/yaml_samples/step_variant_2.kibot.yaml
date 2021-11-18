@@ -36,6 +36,8 @@ outputs:
       ref_separator: ','
       columns:
         - field: Value
+          name: Value
+        - field: Comment
           name: Comment
         - field: References
           name: Designator
