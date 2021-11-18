@@ -1,0 +1,24 @@
+# Example KiBot config file
+kibot:
+  version: 1
+
+filters:
+  - name: '3D change'
+    comment: 'Changes R2 3D model'
+    type: var_rename
+    force_variant: 'default'
+
+variants:
+  - name: 'default'
+    comment: 'Default variant'
+    type: ibom
+    variants_blacklist: T2,T3
+    pre_transform: '3D change'
+
+outputs:
+  - name: '3d_default'
+    comment: "3D view w/variant"
+    type: render_3d
+    options:
+      variant: default
+

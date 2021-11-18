@@ -4,6 +4,7 @@
 # License: GPL-3.0
 # Project: KiBot (formerly KiPlot)
 import os
+from glob import glob
 from shutil import rmtree
 from .misc import CMD_PCBNEW_3D, URL_PCBNEW_3D, RENDER_3D_ERR
 from .gs import (GS)
@@ -70,6 +71,8 @@ class Render3DOptions(Base3DOptions):
             """ Image height (aprox.) """
             self.orthographic = False
             """ Enable the orthographic projection mode (top view looks flat) """
+            self.id_add = ''
+            """ Text to add to the %i expansion content. To differentiate variations of this output """
         super().__init__()
         self._expand_ext = 'png'
 
@@ -79,7 +82,7 @@ class Render3DOptions(Base3DOptions):
         view = self._views.get(self.view, None)
         if view is not None:
             self.view = view
-        self._expand_id += '_'+self._rviews.get(self.view)
+        self._expand_id += '_'+self._rviews.get(self.view)+self.id_add
 
     def run(self, output):
         super().run(output)
@@ -118,7 +121,9 @@ class Render3DOptions(Base3DOptions):
         ret = exec_with_retry(cmd)
         # Remove the temporal PCB
         if board_name != GS.pcb_file:
-            os.remove(board_name)
+            # KiCad likes to create project files ...
+            for f in glob(board_name.replace('.kicad_pcb', '.*')):
+                os.remove(f)
         # Remove the downloaded 3D models
         if self._tmp_dir:
             rmtree(self._tmp_dir)
