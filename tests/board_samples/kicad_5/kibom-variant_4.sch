@@ -4,65 +4,31 @@ EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
 Sheet 1 1
-Title "KiBom Test Schematic"
-Date "2020-03-12"
-Rev "A"
-Comp "https://github.com/SchrodingersGat/KiBom"
+Title ""
+Date ""
+Rev ""
+Comp ""
 Comment1 ""
 Comment2 ""
 Comment3 ""
 Comment4 ""
 $EndDescr
-Text Notes 500  750  0    79   ~ 0
-This schematic serves as a test-file for the KiBot export script.\nHere we implement the IBoM variants style.
 $Comp
-L Device:C C1
-U 1 1 5F43BEC2
-P 1000 1700
-F 0 "C1" H 1115 1746 50  0000 L CNN
-F 1 "1nF" H 1115 1655 50  0000 L CNN
-F 2 "Capacitor_SMD:C_0805_2012Metric" H 1038 1550 50  0001 C CNN
-F 3 "~" H 1000 1700 50  0001 C CNN
-F 4 "T2" H 1000 1700 50  0001 C CNN "Config"
-	1    1000 1700
+L kibom-variant_4-rescue:WC1602A-Display_Character DS1001
+U 1 1 61958928
+P 2875 2425
+F 0 "DS1001" H 2875 3402 50  0000 C CNN
+F 1 "LCD16x02" H 2875 3313 50  0000 C CNN
+F 2 "kibom-variant_4:LCD_16x02_Dual" H 2875 1525 50  0001 C CIN
+F 3 "" H 3575 2425 50  0001 C CNN
+F 4 "WH1602B-TMI-JT#" H 2875 2425 50  0001 C CNN "kicost.topvariant:Value"
+F 5 "ERM1602DNS-2.1" H 2875 2425 50  0001 C CNN "kicost.leftvariant:Value"
+F 6 "209863" H 2875 2425 50  0001 C CNN "kicost.topvariant:sos#"
+F 7 "" H 2875 2425 50  0001 C CNN "dnp"
+F 8 "Test for 3D Model variants, also tests dnp and not fields that are not defined otherwise." H 2875 2425 50  0001 C CNN "Comment"
+F 9 "WH1602B-TMI-JT#" H 2875 2425 50  0001 C CNN "kicost.topvariant:manf#"
+F 10 "ERM1602DNS-2.1" H 2875 2425 50  0001 C CNN "kicost.leftvariant:manf#"
+	1    2875 2425
 	1    0    0    -1  
 $EndComp
-$Comp
-L Device:C C2
-U 1 1 5F43CE1C
-P 1450 1700
-F 0 "C2" H 1565 1746 50  0000 L CNN
-F 1 "1000 pF" H 1565 1655 50  0000 L CNN
-F 2 "Capacitor_SMD:C_0805_2012Metric" H 1488 1550 50  0001 C CNN
-F 3 "~" H 1450 1700 50  0001 C CNN
-F 4 "T3" H 1450 1700 50  0001 C CNN "Config"
-	1    1450 1700
-	1    0    0    -1  
-$EndComp
-$Comp
-L Device:R R1
-U 1 1 5F43D144
-P 2100 1700
-F 0 "R1" H 2170 1746 50  0000 L CNN
-F 1 "1k" H 2170 1655 50  0000 L CNN
-F 2 "Resistor_SMD:R_0805_2012Metric" V 2030 1700 50  0001 C CNN
-F 3 "~" H 2100 1700 50  0001 C CNN
-F 4 "default" H 2100 1700 50  0001 C CNN "Config"
-	1    2100 1700
-	1    0    0    -1  
-$EndComp
-$Comp
-L Device:R R2
-U 1 1 5F43D4BB
-P 2500 1700
-F 0 "R2" H 2570 1746 50  0000 L CNN
-F 1 "1000" H 2570 1655 50  0000 L CNN
-F 2 "Resistor_SMD:R_0805_2012Metric" V 2430 1700 50  0001 C CNN
-F 3 "~" H 2500 1700 50  0001 C CNN
-F 4 "T1" H 2500 1700 50  0001 C CNN "Config"
-	1    2500 1700
-	1    0    0    -1  
-$EndComp
-Text Notes 5950 3200 0    118  ~ 0
-The test tests the following \nvariants matrix:\n        production   test   default\nC1                     X\nC2          X          X\nR1          X          X       X\nR2          X                  X\n\nproduction: blacklist T2\ntest: blacklist T1\ndefault: whitelist T1,default \n         blacklist T2,T3
 $EndSCHEMATC

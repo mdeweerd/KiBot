@@ -1,0 +1,62 @@
+# Example KiBot config file
+kibot:
+  version: 1
+
+global:
+  variant: topvariant
+  output: "%f_%r_%d-%i.%x"
+
+filters:
+  - name: 'kicost_rename'
+    comment: 'Variant rename KiCost style'
+    type: var_rename_kicost
+    # Empty will default to :
+    separator: ''
+    variant_to_value: true
+
+
+variants:
+  - name: 'topvariant'
+    comment: 'LCD with top connections'
+    type: kicost
+    file_id: _leftvariant
+    variant: '^(topvariant)$'
+    pre_transform: 'kicost_rename'
+  - name: 'leftvariant'
+    comment: 'LCD with left connections'
+    type: kicost
+    file_id: _rightvariant
+    variant: '^(leftvariant)$'
+    pre_transform: 'kicost_rename'
+
+outputs:
+  - name: "bom"
+    type: "bom"
+    options:
+      ref_separator: ','
+      columns:
+        - field: Value
+          name: Comment
+        - field: References
+          name: Designator
+        - field: Description
+          name: Description
+        - Footprint
+        - field: 'manf'
+          name: "Manufacturer"
+        - field: 'manf#'
+          name: "Component code"
+        - field: 'sos#'
+          name: "SOS code"
+  - name: "schematic_color"
+    type: "pdf_sch_print"
+  - name: 'steptopvariant'
+    comment: "STEP w/topvariant"
+    type: step
+    options:
+      variant: topvariant
+  - name: 'stepleftvariant'
+    comment: "STEP w/topvariant"
+    type: step
+    options:
+      variant: leftvariant
