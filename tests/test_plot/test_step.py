@@ -88,7 +88,7 @@ def compare_to_golden(ctx,test_dir,actual,expected=None,maxRatio=.01):
     from PIL import ImageStat
     im1 = Image.open(actual)
     im2 = Image.open(expected)
-    diffImg = ImageChops.difference(im2, im1)
-    stat = ImageStat.Stat(diff_img)
+    diffIm = ImageChops.difference(im2, im1)
+    stat = ImageStat.Stat(diffIm)
     ratio=sum(stat.mean)/len(stat.mean)
     ctx.expect(ratio<maxRatio)
