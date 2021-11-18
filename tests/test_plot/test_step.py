@@ -82,6 +82,9 @@ def compare_to_golden(ctx,test_dir,actual,expected=None,maxRatio=.01):
     if expected is None:
         # Placeholder for default name
         expected=actual+"_golden" 
+    # Import locally because this may not be final code, and is not used now
+    import Image
+    from PIL import ImageChops
     im1 = Image.open(actual)
     im2 = Image.open(expected)
     diffImg = ImageChops.difference(im2, im1)
