@@ -31,4 +31,15 @@ F 10 "ERM1602DNS-2.1" H 2875 2425 50  0001 C CNN "kicost.leftvariant:manf#"
 	1    2875 2425
 	1    0    0    -1  
 $EndComp
+$Comp
+L Connector:Conn_01x12_Female J1
+U 1 1 6196B4C4
+P 5350 2450
+F 0 "J1" H 5378 2426 50  0000 L CNN
+F 1 "Conn_01x12_Female" H 5378 2335 50  0000 L CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x12_P2.54mm_Vertical" H 5350 2450 50  0001 C CNN
+F 3 "~" H 5350 2450 50  0001 C CNN
+	1    5350 2450
+	1    0    0    -1  
+$EndComp
 $EndSCHEMATC
