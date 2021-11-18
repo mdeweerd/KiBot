@@ -4,6 +4,7 @@ kibot:
 
 global:
   variant: topvariant
+  dir: "%f_%r_%d%v/"
   output: "%f_%r_%d-%i.%x"
 
 filters:
