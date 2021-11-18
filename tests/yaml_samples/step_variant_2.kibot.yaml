@@ -57,8 +57,61 @@ outputs:
     type: step
     options:
       variant: topvariant
+
   - name: 'stepleftvariant'
     comment: "STEP w/topvariant"
     type: step
     options:
       variant: leftvariant
+
+  - name: "gerbers"
+    comment: "Gerbers for production"
+    type: 'gerb_drill'
+    dir: "%f_%r_%d%v/pdf"
+    options:
+      # [dict|string] [hpgl,ps,gerber,dxf,svg,pdf] Format for a graphical drill map.
+      # Not generated unless a format is specified
+      map:
+        # [string='%f-%i%v.%x'] Name for the map file, KiCad defaults if empty (%i='PTH_drill_map'). Affected by global options
+        # output: '%f-%i%v.%x'
+        # [string='pdf'] [hpgl,ps,gerber,dxf,svg,pdf] Format for a graphical drill map
+        type: 'pdf'
+      # [string] Force this replacement for %i when generating NPTH files
+      npth_id: None
+      # [string='%f-%i%v.%x'] name for the drill file, KiCad defaults if empty (%i='PTH_drill'). Affected by global options
+      # output: '%f-%i%v.%x'
+      # [string] Force this replacement for %i when generating PTH and unified files
+      pth_id: None
+      # [dict|string] Name of the drill report. Not generated unless a name is specified
+      report:
+        # [string=''] Name of the drill report. Not generated unless a name is specified.
+        # (%i='drill_report' %x='txt')
+        filename: ''
+      # [boolean=false] Use the auxiliary axis as origin for coordinates
+      use_aux_axis_as_origin: false
+
+  # Archiver (files compressor):
+  # This is used to generate groups of files in compressed file format.
+  - name: 'compress example'
+    comment: 'Generates a compressed file containing output files.'
+    type: 'compress'
+    dir: "%f_%r_%d%v/ZIPS"
+    options:
+      # [string='auto'] [auto,stored,deflated,bzip2,lzma] Compression algorithm. Use auto to let KiBot select a suitable one
+      compression: 'auto'
+      # [list(dict)] Which files will be included
+      files:
+        # [string=''] Destination directory inside the archive, empty means the same of the file
+        - dest: ''
+          # [string='.*'] A regular expression that source files must match
+          filter: '.*'
+          # [string=''] Collect files from the selected output.
+          # When used the `source` option is ignored
+          from_output: ''
+          # [string='*'] File names to add, wildcards allowed. Use ** for recursive match.
+          # Note this pattern is applied to the output dir specified with -d comman line option
+          source: 'PCB'
+      # [string='ZIP'] [ZIP,TAR,RAR] Output file format
+      format: 'ZIP'
+      # [string='%f-%i%v.%x'] Name for the generated archive (%i=name of the output %x=according to format). Affected by global options
+      # output: '%f-%i%v.%x'
