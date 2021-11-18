@@ -733,8 +733,8 @@ class SchematicField(object):
         self.flags = '0001'
         self.hjustify = 'C'
         self.vjustify = 'C'
-        self.italic = 'N'
-        self.bold = 'N'
+        self.italic = False
+        self.bold = False
 
     @staticmethod
     def parse(line, f):
