@@ -58,12 +58,14 @@ outputs:
     type: step
     options:
       variant: topvariant
+      download: false
 
   - name: 'stepleftvariant'
     comment: "STEP w/topvariant"
     type: step
     options:
       variant: leftvariant
+      download: false
 
   - name: "gerbers"
     comment: "Gerbers for production"
@@ -93,7 +95,7 @@ outputs:
 
   # Archiver (files compressor):
   # This is used to generate groups of files in compressed file format.
-  - name: 'compress example'
+  - name: 'compress'
     comment: 'Generates a compressed file containing output files.'
     type: 'compress'
     dir: "%f_%r_%d%v/ZIPS"
