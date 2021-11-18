@@ -2,6 +2,9 @@
 kibot:
   version: 1
 
+import:
+  - PCBWay2.kibot.yaml
+
 global:
   variant: topvariant
   dir: "%f_%r_%d%v/"
@@ -118,3 +121,5 @@ outputs:
       format: 'ZIP'
       # [string='%f-%i%v.%x'] Name for the generated archive (%i=name of the output %x=according to format). Affected by global options
       # output: '%f-%i%v.%x'
+      #
+      #
