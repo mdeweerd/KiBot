@@ -1040,6 +1040,10 @@ outputs:
       dnf_filter: ''
       # [boolean=true] Downloads missing 3D models from KiCad git. Only applies to models in KISYS3DMOD
       download: true
+      # [number=720] Image height (aprox.)
+      height: 720
+      # [string=''] Text to add to the %i expansion content. To differentiate variations of this output
+      id_add: ''
       # [string='https://gitlab.com/kicad/libraries/kicad-packages3D/-/raw/master/'] Base URL for the KiCad 3D models
       kicad_3d_url: 'https://gitlab.com/kicad/libraries/kicad-packages3D/-/raw/master/'
       # [number=0] Steps to move in the X axis, positive is to the right.
@@ -1054,6 +1058,8 @@ outputs:
       no_tht: false
       # [boolean=false] Used to exclude 3D models for components with 'virtual' attribute
       no_virtual: false
+      # [boolean=false] Enable the orthographic projection mode (top view looks flat)
+      orthographic: false
       # [string='%f-%i%v.%x'] Name for the generated image file (%i='3D_$VIEW' %x='png'). Affected by global options
       output: '%f-%i%v.%x'
       # [boolean=false] Enable the ray tracing. Much better result, but slow, and you'll need to adjust `wait_rt`
@@ -1071,6 +1077,8 @@ outputs:
       # [number=5] How many seconds we must wait before capturing the ray tracing render.
       # Lamentably KiCad can save an unfinished image. Enlarge it if your image looks partially rendered
       wait_ray_tracing: 5
+      # [number=1280] Image width (aprox.)
+      width: 1280
       # [number=0] Zoom steps. Use positive to enlarge, get closer, and negative to reduce.
       # Same result as using the mouse wheel in the 3D viewer
       zoom: 0

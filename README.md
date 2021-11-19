@@ -1413,6 +1413,8 @@ Next time you need this list just use an alias, like this:
         - `dnf_filter`: [string|list(string)=''] Name of the filter to mark components as not fitted.
                         A short-cut to use for simple cases where a variant is an overkill.
         - `download`: [boolean=true] Downloads missing 3D models from KiCad git. Only applies to models in KISYS3DMOD.
+        - `height`: [number=720] Image height (aprox.).
+        - `id_add`: [string=''] Text to add to the %i expansion content. To differentiate variations of this output.
         - `kicad_3d_url`: [string='https://gitlab.com/kicad/libraries/kicad-packages3D/-/raw/master/'] Base URL for the KiCad 3D models.
         - `move_x`: [number=0] Steps to move in the X axis, positive is to the right.
                     Just like pressing the right arrow in the 3D viewer.
@@ -1421,6 +1423,7 @@ Next time you need this list just use an alias, like this:
         - `no_smd`: [boolean=false] Used to exclude 3D models for surface mount components.
         - `no_tht`: [boolean=false] Used to exclude 3D models for through hole components.
         - `no_virtual`: [boolean=false] Used to exclude 3D models for components with 'virtual' attribute.
+        - `orthographic`: [boolean=false] Enable the orthographic projection mode (top view looks flat).
         - `output`: [string='%f-%i%v.%x'] Name for the generated image file (%i='3D_$VIEW' %x='png'). Affected by global options.
         - `ray_tracing`: [boolean=false] Enable the ray tracing. Much better result, but slow, and you'll need to adjust `wait_rt`.
         - `silk`: [string='#E5E5E5'] Color for the silk screen.
@@ -1430,6 +1433,7 @@ Next time you need this list just use an alias, like this:
         - `view`: [string='top'] [top,bottom,front,rear,right,left,z,Z,y,Y,x,X] Point of view.
         - `wait_ray_tracing`: [number=5] How many seconds we must wait before capturing the ray tracing render.
                               Lamentably KiCad can save an unfinished image. Enlarge it if your image looks partially rendered.
+        - `width`: [number=1280] Image width (aprox.).
         - `zoom`: [number=0] Zoom steps. Use positive to enlarge, get closer, and negative to reduce.
                   Same result as using the mouse wheel in the 3D viewer.
 
