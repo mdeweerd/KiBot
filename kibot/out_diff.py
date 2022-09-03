@@ -93,7 +93,7 @@ class DiffOptions(BaseOptions):
                 git hashes involved in the comparison. If you plan to compress the output don't
                 forget to disable the `follow_links` option """
             self.copy_instead_of_link = False
-            """ When `add_link_id` is enabled creates a copy of the file instead of a symlink.
+            """ When `copy_instead_of_link` is enabled creates a copy of the file instead of a symlink.
                 Useful for some Windows setups """
         super().__init__()
         self._expand_id = 'diff'
