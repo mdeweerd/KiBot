@@ -726,44 +726,43 @@ class VariantOptions(BaseOptions):
         for m in GS.get_modules_board(board):
             if extra_debug:
                 logger.debug("- Processing module " + m.GetReference())
-            default = None
+            slots = None  # Set when match is found
             # Look for text objects
             for gi in m.GraphicalItems():
-                if gi.GetClass() in ['MTEXT', 'PCB_TEXT']:
-                    # Check if the text matches the magic style
-                    text = gi.GetText().strip()
-                    match = field_regex.match(text)
-                    if match:
-                        if extra_debug:
-                            logger.debug(f" - By variant name: {text}")
-                        # Check if this is for the current variant
+                if gi.GetClass() not in ['MTEXT', 'PCB_TEXT']:
+                    continue
+
+                # Check if the text matches the magic style
+                text = gi.GetText().strip()
+                if match := field_regex.match(text):
+                    if extra_debug:
+                        logger.debug(f" - By variant name: {text}")
+
+                    # Check if this is for the current variant
+                    if match.group(1) not in [variant_name, '_default_']:
+                        continue
+
+                    var = match.group(1)
+                    slots = match.group(2).split(',') if match.group(2) else []
+                    if var != '_default_':
+                        break
+
+                    if self.extra_debug:
+                        logger.debug('- Found defaults: {}'.format(slots))
+                elif match := field_regex_sp.match(text):
+                    # Try with the variant specific pattern
+                    if extra_debug:
+                        logger.debug(f" - Variant specific: {text}")
+
+                    # Do the match
+                    if self.variant.matches_variant(match.group(1)):
                         var = match.group(1)
                         slots = match.group(2).split(',') if match.group(2) else []
-                        # Do the match
-                        if var == '_default_':
-                            default = slots
-                            if self.extra_debug:
-                                logger.debug('- Found defaults: {}'.format(slots))
-                        else:
-                            if var == variant_name:
-                                self.apply_list_of_3D_models(enable, slots, m, var)
-                                break
-                    else:
-                        # Try with the variant specific pattern
-                        match = field_regex_sp.match(text)
-                        if match:
-                            if extra_debug:
-                                logger.debug(f" - Variant specific: {text}")
-                            var = match.group(1)
-                            slots = match.group(2).split(',') if match.group(2) else []
-                            # Do the match
-                            if self.variant.matches_variant(var):
-                                self.apply_list_of_3D_models(enable, slots, m, var)
-                                break
-            else:
-                # No match found
-                if default is not None:
-                    self.apply_list_of_3D_models(enable, default, m, '_default_')
+                        break
+            
+            # Apply slots if any
+            if slots is not None:
+                self.apply_list_of_3D_models(enable, slots, m, var)
 
     def create_3D_highlight_file(self):
         if self._highlight_3D_file:
